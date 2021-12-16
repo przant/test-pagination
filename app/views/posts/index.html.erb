@@ -1,58 +1,67 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col">
+    <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+  <h1>Posts</h1>
 
-<br>
-<br>
+  <br>
+  <br>
 
-<%= form_with url: posts_url, method: :get, id: "myform" do |form| %>
-  <%= select_tag :items, options_from_collection_for_select([5, 10] , :to_s, :to_s, params[:items] || 10), form: "myform", onchange: "this.form.submit()" %>
-  <%= form.submit 'Submit Form' %>
-<% end %>
-
-<br>
-<br>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Comment</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= post.title %></td>
-        <td><%= post.comment %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Title</th>
+        <th>Comment</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><%= post.comment %></td>
+          <td><%= link_to 'Show', post %></td>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Post', new_post_path %>
+  <br>
 
-<br>
-<br>
+  <%= link_to 'New Post', new_post_path %>
 
-<br>
-<br>
+  <br>
+  <br>
 
-<%= params %>
+  <br>
+  <br>
 
-<br>
-<br>
+  <%= params %>
 
-<%= page_entries_info @posts %>
+  <br>
+  <br>
 
-<br>
-<br>
+  <%= paginate @posts %>
 
-<%= paginate @posts %>
+  <br>
+  <br>
+
+  <div>
+    <span>Items per page</span>
+    <ul>
+      <% ITEMS_PER_PAGE.each do |size| %>
+        <li><%= link_to size, url_for(per_page: size, page: params[:page]) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <br>
+  <br>
+
+  <%= page_entries_info @posts %>
+
+  </div>
+</div>

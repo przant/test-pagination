@@ -3,10 +3,10 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    unless params[:items]
-      @posts = Post.all.page(params[:page]).per(10)
+    unless params[:per_page]
+      @posts = Post.all.page(params[:page])
     else
-      @posts = Post.all.page(params[:page]).per(params[:items])
+      @posts = Post.all.page(params[:page]).per(params[:per_page])
     end
     @post
   end
