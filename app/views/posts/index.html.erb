@@ -2,6 +2,17 @@
 
 <h1>Posts</h1>
 
+<br>
+<br>
+
+<%= form_with url: posts_url, method: :get, id: "myform" do |form| %>
+  <%= select_tag :items, options_from_collection_for_select([5, 10] , :to_s, :to_s, params[:items] || 10), form: "myform", onchange: "this.form.submit()" %>
+  <%= form.submit 'Submit Form' %>
+<% end %>
+
+<br>
+<br>
+
 <table>
   <thead>
     <tr>
@@ -27,3 +38,21 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
+<br>
+<br>
+
+<br>
+<br>
+
+<%= params %>
+
+<br>
+<br>
+
+<%= page_entries_info @posts %>
+
+<br>
+<br>
+
+<%= paginate @posts %>
